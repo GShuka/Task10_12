@@ -29,7 +29,10 @@ jobs:
         pip install -r requirements.txt
 
     - name: Build Docker image
-      run: docker build -t gshuka/task10_12 --build-arg CHAR_INPUT=${CHAR_INPUT} .
+      run: docker build -t gshuka/task10_12 --build-arg CHAR_INPUT=$CHAR_INPUT .
+      env:
+          CHAR_INPUT: ${{ secrets.CHAR_INPUT }}
+
 
     - name: Log in to Docker Hub
       run: echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
