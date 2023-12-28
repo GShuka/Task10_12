@@ -1,12 +1,20 @@
 # task1.py
-def char_to_integer(char_variable):
-    try:
-        result = int(char_variable)
-        return result
-    except ValueError:
-        return "Input is not a digit."
+import os
 
-char_input = input("Enter a character: ")
-result = char_to_integer(char_input)
-print("Result:", result)
+def process_char(char):
+    try:
+        int_value = int(char)
+        return int_value
+    except ValueError:
+        return f"Error: '{char}' is not a digit."
+
+if __name__ == "__main__":
+    char_input = os.getenv("CHAR_INPUT")
+
+    if char_input is None:
+        print("Error: CHAR_INPUT environment variable is not set.")
+        exit(1)
+
+    result = process_char(char_input)
+    print(result)
 
